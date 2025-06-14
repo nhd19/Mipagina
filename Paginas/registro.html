@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="header">
+  <div class="log">
+    <a href="/index.html"> <img src="/imagenes/Captura de pantalla 2025-04-19 170327.png" alt="logo"></a>
+  </div>
+</header>
+ <section>
+  <input type="checkbox" id="menu-toggle" />
+  <label for="menu-toggle" class="menu-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+
+ 
+  <nav class="menu">
+    <a href="menu.html">Menu</a>
+    <a href="carrito.html">Carrito</a>
+    <a href="ingresar.html">Ingresar</a>
+    <a href="visitanos.html">Visítanos</a>
+  </nav>
+</section>
+<main>
+  <form class="form-container" id="registroForm">
+    <h2>Regístrate</h2>
+
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required />
+    </div>
+
+    <div class="form-group">
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" name="apellido" required />
+    </div>
+
+    <div class="form-group">
+      <label for="correo">Correo:</label>
+      <input type="email" id="correo" name="correo" required />
+    </div>
+
+    <div class="form-group">
+      <label for="usuario">Usuario:</label>
+      <input type="text" id="usuario" name="usuario" required />
+    </div>
+
+    <div class="form-group">
+      <label for="contrasena">Contraseña:</label>
+      <input type="password" id="contrasena" name="contrasena" required />
+    </div>
+
+    <div class="form-group">
+      <label for="tarjeta">Agregar tarjeta de crédito:</label>
+      <input type="text" id="tarjeta" name="tarjeta" maxlength="16" required />
+    </div>
+
+    <button type="submit" class="submit-btn">Crear cuenta</button>
+  </form>
+</main>
+<footer class="footer">
+        <div class="iconos">
+          <a href=""><img src="/imagenes/ig.png" alt="Instagram" /></a>
+          <a href=""><img src="/imagenes/w.png" alt="WhatsApp" /></a>
+          <a href=""><img src="/imagenes/fb.png" alt="Facebook"/></a>
+        </div>
+        <div class="footer-links">
+          <a href="sobrenosotros.html">Sobre nosotros</a><br>
+          <a href="privacidad.html">Aviso de privacidad</a>
+        </div>
+      </footer>
+      <script src="/registro.js"></script>
+</body>
+</html>

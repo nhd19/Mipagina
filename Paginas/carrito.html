@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito</title>
+  <link rel="stylesheet" href="/styles.css"/>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+ <header class="header">
+  <div class="log">
+    <a href="/index.html"> <img src="/imagenes/Captura de pantalla 2025-04-19 170327.png" alt="logo"></a>
+  </div>
+</header>
+ <section>
+  <input type="checkbox" id="menu-toggle" />
+  <label for="menu-toggle" class="menu-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+
+ 
+  <nav class="menu">
+    <a href="menu.html">Menu</a>
+    <a href="carrito.html">Carrito</a>
+    <a href="ingresar.html">Ingresar</a>
+    <a href="visitanos.html">Visítanos</a>
+  </nav>
+</section>
+
+
+<div class="container my-4 form-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Cantidad</th>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="tablaCarrito"></tbody>
+  </table>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <span class="fs-5 fw-semibold">Total:</span>
+    <input type="text" id="totalCarrito" value="$0" readonly class="form-control w-auto text-end" style="max-width: 150px;" />
+  </div>
+
+  <button class="boton" onclick="vaciarCarrito()">Pagar</button>
+
+</div>
+
+<footer class="footer">
+  <div class="iconos">
+    <a href=""><img src="/imagenes/ig.png" alt="Instagram" /></a>
+    <a href=""><img src="/imagenes/w.png" alt="WhatsApp" /></a>
+    <a href=""><img src="/imagenes/fb.png" alt="Facebook"/></a>
+  </div>
+  <div class="footer-links">
+    <a href="sobrenosotros.html">Sobre nosotros</a><br>
+    <a href="privacidad.html">Aviso de privacidad</a>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tablaBody = document.getElementById("tablaCarrito");
+  const totalInput = document.getElementById("totalCarrito");
+
+  function cargarCarrito() {
+    tablaBody.innerHTML = "";
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let total = 0;
+
+    carrito.forEach((producto, index) => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <td>1</td>
+        <td>${producto.nombre}</td>
+        <td>$${producto.precio}</td>
+        <td>
+          <button class="bt" onclick="eliminarProducto(${index})">Eliminar</button>
+        </td>
+      `;
+      tablaBody.appendChild(fila);
+      total += parseFloat(producto.precio);
+    });
+
+    totalInput.value = `$${total.toFixed(2)}`;
+  }
+
+  window.eliminarProducto = function(indice) {
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    carrito.splice(indice, 1);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    cargarCarrito();
+  };
+
+  const btnPagar = document.querySelector(".boton");
+const btnConfirmarPago = document.getElementById("btnConfirmarPago");
+
+btnPagar.addEventListener("click", function () {
+  const modal = new bootstrap.Modal(document.getElementById("modalConfirmarPago"));
+  modal.show();
+});
+
+btnConfirmarPago.addEventListener("click", function () {
+  localStorage.removeItem("carrito");
+  cargarCarrito();
+
+  const modalConfirmar = bootstrap.Modal.getInstance(document.getElementById("modalConfirmarPago"));
+  modalConfirmar.hide();
+
+  const modalGracias = new bootstrap.Modal(document.getElementById("modalGracias"));
+  modalGracias.show();
+});
+
+
+  cargarCarrito();
+});
+
+</script>
+<!-- Modal de confirmación -->
+<div class="modal fade" id="modalConfirmarPago" tabindex="-1" aria-labelledby="modalConfirmarPagoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-warning-subtle">
+        <h5 class="modal-title" id="modalConfirmarPagoLabel">Confirmar pago</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        ¿Deseas finalizar tu compra?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" id="btnConfirmarPago">Sí, finalizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de agradecimiento -->
+<div class="modal fade" id="modalGracias" tabindex="-1" aria-labelledby="modalGraciasLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header bg-success-subtle">
+        <h5 class="modal-title w-100" id="modalGraciasLabel">¡Gracias por tu compra!</h5>
+      </div>
+      <div class="modal-body">
+        Esperamos verte pronto ☕🍰
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
